@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/hhuc/python:3.7-bkb2
+FROM python:3.10-slim
 
 # 设置环境变量，防止 Python 生成 pyc 缓存文件，及强制标准输出不缓冲（方便 docker logs 实时查看）
 ENV PYTHONDONTWRITEBYTECODE 1
