@@ -1,0 +1,48 @@
+# ==========================================
+# Docker 构建上下文排除规则
+# 仅将后端运行所需的代码打入镜像
+# ==========================================
+
+# --- Git / VCS ---
+.git
+.gitignore
+
+# --- IDE 和编辑器 ---
+.vscode
+.idea
+*.swp
+*.swo
+
+# --- 前端构建产物和依赖（Docker 仅部署后端，前端不需要打入） ---
+pyvueapps/web/node_modules
+pyvueapps/web/dist
+pyvueapps/node_modules
+
+# --- Python 缓存与虚拟环境 ---
+**/__pycache__
+**/*.pyc
+**/*.pyo
+pyvueapps/svr/pyApiSvr/venv
+
+# --- 历史遗留的崩溃转储与大日志 ---
+pyvueapps/svr/pyApiSvr/core.*
+pyvueapps/svr/pyApiSvr/nohup.out
+
+# --- 数据目录（运行时生成，不需打入） ---
+pyvueapps/datas
+
+# --- 敏感配置和部署文件（不应进入镜像） ---
+.env
+.env.*
+!.env.example
+
+# --- 文档和备份 ---
+docs
+bak
+README.md
+LICENSE
+
+# --- Docker 自身配置文件 ---
+dockerfile
+bkb2024.yml
+start.sh

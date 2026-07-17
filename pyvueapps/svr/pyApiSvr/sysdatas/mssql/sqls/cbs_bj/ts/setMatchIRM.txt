@@ -1,0 +1,12 @@
+update T_Match set
+	homeIRM = case when %(hora)s = 'h' then %(irmCode)s else '' end ,
+	homeWin = case when %(hora)s = 'h' then 0 else 1 end  ,
+	awayIRM = case when %(hora)s = 'a' then %(irmCode)s else '' end ,
+	awayWin = case when %(hora)s = 'a' then 0 else 1 end
+where matchCode=%(matchCode)s
+
+update T_Section set
+	startTime = case when startTime is null then getdate() else startTime end,
+	endTime = case when endTime is null then getdate() else endTime end
+where matchCode = %(matchCode)s
+

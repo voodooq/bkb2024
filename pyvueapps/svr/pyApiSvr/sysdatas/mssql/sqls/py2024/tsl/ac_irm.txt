@@ -1,0 +1,5 @@
+update T_ResL set
+	startTm = case when startTm>0 then startTm else datediff( second,'1970-1-1', getdate()  end ,
+	endTm =  datediff( second,'1970-1-1', getdate()) ,
+	irm = %(irm)s
+where reslId=%(reslId)s

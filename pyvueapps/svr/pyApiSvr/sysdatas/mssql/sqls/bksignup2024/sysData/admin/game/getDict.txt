@@ -1,0 +1,9 @@
+select * from T_DictArea order by dictCode
+select * from T_DictAge
+select * from T_DictCheckReason order by dictCode
+select * from T_DictCheckStatus order by dictCode
+select * from T_DictFunction order by dictCode
+select * from T_DictGender order by dictCode
+select * from T_DictID order by dictCode
+select * from T_DictPhase order by dictCode
+select * from T_DictSignupStatus order by dictCode

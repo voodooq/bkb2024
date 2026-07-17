@@ -1,0 +1,3 @@
+select * from T_Game where gameCode=%(gameCode)s;
+select * from T_Event;
+select * from T_Phase;

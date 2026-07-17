@@ -1,0 +1,6 @@
+update T_ResL set   score = %(score)s   where reslId=%(resId)s;
+insert into T_ResPointsL (
+	resId , point , tm
+) values (
+	%(resId)s , %(score)s ,  datediff( second,'1970-1-1', getdate())
+)

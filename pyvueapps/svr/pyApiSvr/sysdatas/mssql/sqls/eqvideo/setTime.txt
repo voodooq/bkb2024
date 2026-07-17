@@ -1,0 +1,1 @@
+update T_Res Set startTm = %(start)s , endTm=%(end)s where resId=%(resId)s

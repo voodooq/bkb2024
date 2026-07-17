@@ -1,0 +1,8 @@
+select
+	j.dictCode , j.dictLabel
+from T_DictJob j
+join T_Phase p on p.memberNum = j.memberNum
+join T_Match m on m.phaseCode = p.phaseCode
+where m.matchCode=%(matchCode)s
+order by j.dictOrder;
+select * , bibCode+' - '+memName as memBibName from v_info_matchMember where functionCode='04' and  matchCode=%(matchCode)s order by hora   ,right('00000'+bibCode,5);

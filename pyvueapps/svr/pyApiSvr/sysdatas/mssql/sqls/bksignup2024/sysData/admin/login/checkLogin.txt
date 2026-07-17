@@ -1,0 +1,7 @@
+select
+	u.userCode ,
+	u.userName
+From T_User u
+where userId   = %(userId)s+1;
+select * from  T_Team;
+select * from T_TeamMem;

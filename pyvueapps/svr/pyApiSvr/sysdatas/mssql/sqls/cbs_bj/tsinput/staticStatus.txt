@@ -1,0 +1,5 @@
+declare @matchCode varchar(100)
+select @matchCode =%(matchCode)s
+-- status
+select * from v_scorestatus_match where matchCode=@matchCode
+select *, ROW_NUMBER() over ( order by sectionOrder) -1 as sectionIndex from v_scorestatus_section where matchCode=@matchCode

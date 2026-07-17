@@ -1,0 +1,1 @@
+select * from T_Team where eventCode =%(eventCode)s order by teamName

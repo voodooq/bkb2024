@@ -1,0 +1,6 @@
+MERGE INTO T_User AS target
+USING (SELECT %(userCode)s AS userCode, %(nickname)s AS nickname, %(pwd)s AS pwd, %(userDesc)s AS userDesc, %(userStatus)s AS userStatus) AS source
+ON target.userCode = source.userCode
+WHEN NOT MATCHED THEN
+  INSERT (userCode, nickname, pwd, userDesc, userStatus)
+  VALUES (source.userCode, source.nickname, source.pwd, source.userDesc, source.userStatus);

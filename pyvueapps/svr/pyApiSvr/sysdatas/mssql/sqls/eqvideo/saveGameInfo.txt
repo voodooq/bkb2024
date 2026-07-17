@@ -1,0 +1,10 @@
+update T_Game set
+	gameName=%(gameName)s ,
+	address=%(address)s ,
+	openDate=%(openDate)s ,
+	closeDate=%(closeDate)s ,
+	rtmpUrl=%(rtmpUrl)s ,
+	flvUrl=%(flvUrl)s ,
+	m3u8Url=%(m3u8Url)s ,
+	vodUrl=%(vodUrl)s
+where gameCode = %(gameCode)s

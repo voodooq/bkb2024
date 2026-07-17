@@ -1,0 +1,18 @@
+select
+	si.* ,
+	sc.cateLabel ,
+	m.matchCode ,
+	s.sectionOrder , s.sectionCode ,
+	(
+		select count(*) from T_MemStatic ms where ms.matchCode = m.matchCode and ms.memCode =%(memCode)s and ms.actionCode = si.itemCode
+	) as matchCount ,
+	(
+		select count(*) from T_MemStatic ms where ms.matchCode = m.matchCode and ms.memCode =%(memCode)s and ms.actionCode = si.itemCode and
+			s.startTime is not null and s.startTime<= ms.Tm and
+			ms.Tm <= case when s.endTime is null then getdate() else s.endTime end
+	) as sectionCount
+from T_DictStaticItem si
+join T_DictStaticCategory sc on sc.cateCode = si.cateCode
+join T_Match m on m.matchCode =%(matchCode)s
+join T_Section s on s.matchCode = m.matchCode and sectionCode=%(sectionCode)s
+order by s.sectionOrder , si.itemOrder;

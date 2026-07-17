@@ -1,0 +1,1 @@
+delete T_Event where eventKey=%(eventKey)s

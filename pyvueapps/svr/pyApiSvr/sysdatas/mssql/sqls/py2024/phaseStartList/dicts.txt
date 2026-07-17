@@ -1,0 +1,6 @@
+ select
+	p.* ,
+	e.eventId , e.eventName
+ from T_Phase p
+ join T_Event e on e.eventCode = p.eventCode
+ where p.phaseCode=%(phaseCode)s

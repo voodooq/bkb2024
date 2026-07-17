@@ -1,0 +1,13 @@
+select
+	a.* ,
+	o.orgName ,
+	case
+		when a.genderCode ='W' then N'女'
+		when a.genderCode ='M' then N'男'
+		else ''
+	end as genderName ,
+	convert(varchar(10) , a.birthday, 121) as birthdayStr
+From T_Ath a
+join T_Org o on o.orgCode = a.orgCode
+where a.orgCode=%(orgCode)s
+order by a.athCode

@@ -1,0 +1,27 @@
+select 
+	r.resId , 
+	isnull( rl.reslId,0) as reslId ,
+	isnull(rl.startTm ,0) as st ,
+	isnull(rl.endTm,0) as em ,
+	isnull(rl.score,'') as score ,
+	isnull(irm,'') as irm ,
+	case when isnull(startTm,0) = 0 then 1 else 0  end as canStart ,
+	case when isnull(rl.startTm,0) >0 and isnull(rl.endTm,0)=0 then 1 else 0 end as canPoint ,
+	1 as canIrm ,
+	case when isnull(rl.startTm,0) >0 and isnull(rl.endTm,0)=0 then 1 else 0 end as canOver ,
+	case when isnull(startTm,0) > 0 then 1 else 0  end as canReset	
+From T_Res r 
+left join T_ResL rl on rl.resId = r.resId 
+where r.resId = %(resId)s;
+
+
+select 
+	rp.* ,
+	rp.tm - rl.startTm as duration ,
+	(rp.tm - rl.startTm ) / 60 as tmMinute,
+	(rp.tm - rl.startTm ) % 60 as tmSecond ,
+	convert(varchar(10) , (rp.tm - rl.startTm ) / 60) +''''+convert(varchar(10),(rp.tm - rl.startTm ) % 60) +'"' as tmStr
+from T_ResPointsL rp
+join T_ResL rl on rl.resId = rp.resId
+where rp.resId =%(resId)s order by tm desc 
+

@@ -1,0 +1,7 @@
+update T_Server set
+    serverCode =%(serverCode)s ,
+    serverHost =%(serverHost)s ,
+    serverPort =%(serverPort)s ,
+    serverDesc =%(serverDesc)s ,
+    appPath =%(appPath)s
+  where serverId = %(serverId)s

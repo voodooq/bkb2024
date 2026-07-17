@@ -1,0 +1,1 @@
+select * from T_Dict order by dictOrder;

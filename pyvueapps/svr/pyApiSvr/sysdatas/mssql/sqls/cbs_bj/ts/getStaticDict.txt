@@ -1,0 +1,6 @@
+select 
+	c.cateOrder,  c.cateLabel ,
+	i.*
+From T_DictStaticCategory c
+join T_DictStaticItem i on i.cateCode = c.cateCode
+order by c.cateOrder , i.itemOrder

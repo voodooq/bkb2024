@@ -1,0 +1,8 @@
+select *
+	,case
+		when gameStatus = 0 then N'未开始'
+		when gameStatus = 1 then N'进行中'
+		when gameStatus = 2 then N'已结束'
+		else ''
+	end as gameStatusText
+from T_Game where %(status)s =9 or gameStatus=%(status)s order by openDate desc

@@ -1,0 +1,2 @@
+update T_Match set planTime = %(planTime)s
+where matchCode =%(matchCode)s

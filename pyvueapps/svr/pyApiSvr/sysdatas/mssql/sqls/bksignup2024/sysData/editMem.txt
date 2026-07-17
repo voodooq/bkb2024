@@ -1,0 +1,10 @@
+update T_TeamMem set
+    memName =%(memName)s ,
+    functionCode =%(functionCode)s ,
+    genderCode =%(genderCode)s ,
+    idTypeCode =%(idTypeCode)s ,
+    idCode =%(idCode)s ,
+    tel =%(memTel)s ,
+    photoImg =%(photoImg)s ,
+    idImgList =%(idImgList)s
+where memKey=%(memKey)s

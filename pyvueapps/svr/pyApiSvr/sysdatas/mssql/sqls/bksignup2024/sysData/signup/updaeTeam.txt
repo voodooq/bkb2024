@@ -1,0 +1,4 @@
+update T_Team set 
+signupStatusCode =%(signupStatus)s,
+checkDesc = %(checkDesc)s
+where teamKey=%(teamKey)s

@@ -1,0 +1,5 @@
+select
+	v.* ,
+	g.openDate , g.closeDate , g.address
+from V_Result  v join T_Game g on g.gameCode = v.gameCode
+where v.resCode =%(videoCode)s

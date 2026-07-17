@@ -1,0 +1,12 @@
+update T_Res set
+	startTm = case
+		when %(status)s = 0 then 0
+		when %(status)s = 1 then DATEDIFF( second , '1970-01-01', getdate())
+		when %(status)s = 2 then startTm
+	end ,
+	endTm = case
+		when %(status)s = 0 then 0
+		when %(status)s = 1 then 0
+		when %(status)s = 2 then DATEDIFF( second , '1970-01-01', getdate())
+	end
+where resId=%(resId)s

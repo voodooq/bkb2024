@@ -1,0 +1,8 @@
+select 
+	userId , userCode , userName , userDesc 
+from T_User u 
+where 
+	userCode in (
+		select userCode  from T_UserRole where roleCode in ('tsb')
+	) and 
+	lower(dbo.md5(LOWER( userCode ) + pwd )) = LOWER(%(sec)s)

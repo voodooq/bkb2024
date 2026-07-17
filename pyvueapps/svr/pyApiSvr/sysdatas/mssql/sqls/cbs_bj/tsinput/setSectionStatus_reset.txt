@@ -1,0 +1,14 @@
+update T_MemStatic set enableFlag = 0 where staticId in (
+	select
+		staticId
+	from T_MemStatic ms
+	join T_Section s on
+		s.matchCode = ms.matchCode and
+		s.startTime is not null and
+		ms.Tm>= s.startTime and ms.Tm < isnull( s.endTime , getdate())  and
+		s.sectionCode=%(sectionCode)s
+);
+
+update T_Section set
+	endtime =   null , startTime = null
+where sectionCode =%(sectionCode)s ;

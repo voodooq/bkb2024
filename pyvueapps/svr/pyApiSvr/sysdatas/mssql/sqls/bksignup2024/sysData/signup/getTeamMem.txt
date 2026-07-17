@@ -1,0 +1,4 @@
+select *
+From T_TeamMem
+where teamCode = %(teamCode)s
+and memName like '%'+%(memName)s+'%'

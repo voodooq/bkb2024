@@ -1,0 +1,21 @@
+select 
+	e.eventName , e.groupCode , 
+	p.* 
+from T_Phase p
+join T_Event e on e.eventCode = p.eventCode 
+where p.phaseCode=%(phaseCode)s;
+
+select 
+	r.resId , r.resOrder , 
+	a.athCode , a.athName , 
+	o.orgCode , o.orgName ,
+	r.phaseCode
+from T_Res r 
+left join T_Ath a on a.athCode = r.athCode
+left join T_Org o on o.orgCode = a.orgCode
+where r.phaseCode =%(phaseCode)s
+order by r.resOrder , r.resOrder1;
+
+insert into T_ResL (resId ) select resId from T_Res r where phaseCode=%(phaseCode)s and  not exists(
+	select * from T_ResL rl where rl.resId = r.resId 
+)

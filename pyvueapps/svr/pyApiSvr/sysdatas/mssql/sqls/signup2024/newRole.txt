@@ -1,0 +1,1 @@
+insert into T_DictRole( dictCode , dictName) values (%(c)s, %(n)s)

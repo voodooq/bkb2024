@@ -1,0 +1,19 @@
+INSERT INTO [dbo].[T_Dict]
+           ([dictCateCode]
+           ,[dictOrder]
+           ,[dictCode]
+           ,[dictName]
+           ,[dictDesc]
+           ,[dictEx1]
+           ,[dictEx2]
+           ,[dictEx3])
+VALUES(
+    %(dictCateCode)s ,
+    %(dictOrder)s ,
+    %(dictCode)s ,
+    %(dictName)s ,
+    %(dictDesc)s ,
+    %(dictEx1)s ,
+    %(dictEx2)s ,
+    %(dictEx3)s
+)

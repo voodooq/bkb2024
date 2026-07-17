@@ -1,0 +1,23 @@
+
+insert into T_Phase (
+	eventCode ,
+	phaseOrder ,
+	phaseCode ,
+	phaseName ,
+	phaseDesc ,
+	lineNum ,
+	regNum ,
+	isFirstRound ,
+	isFinalRound
+) values (
+	%(eventCode)s ,
+	%(phaseOrder)s ,
+	%(phaseCode)s ,
+	%(phaseName)s ,
+	%(phaseDesc)s ,
+	%(lineNum)s ,
+	%(regNum)s ,
+	%(isFirstRound)s ,
+	%(isFinalRound)s
+
+)

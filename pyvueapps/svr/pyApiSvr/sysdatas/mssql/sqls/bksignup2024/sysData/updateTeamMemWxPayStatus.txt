@@ -1,0 +1,7 @@
+update T_TeamMem set
+    payStatus =%(payStatus)s,
+    transaction_id =%(transaction_id)s,
+    openid =%(openid)s,
+    payTime = %(payTime)s,
+    totalFee = %(totalFee)s
+where memKey=%(memKey)s

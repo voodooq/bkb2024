@@ -1,0 +1,1 @@
+{"gameId":28,"gameCode":"D05GJSGD1620240601","gameName":"2024年全国击剑冠军赛分站赛（第二站）","address":"清远体育中心","openDate":"2023-10-18","closeDate":"2023-10-23","gameDesc":"FE"}

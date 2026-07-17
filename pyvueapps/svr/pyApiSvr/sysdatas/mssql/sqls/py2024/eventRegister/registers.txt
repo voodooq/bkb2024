@@ -1,0 +1,34 @@
+select
+	ea.* , e.eventName ,
+	a.athCode, a.athName ,  a.birthday,
+	o.orgName ,
+	g.dictName as genderName
+from T_EventAth ea
+join  T_Ath a on a.athCode = ea.athCode
+join T_Event e on e.eventCode = ea.eventCode
+join T_Org o on o.orgCode = a.orgCode
+join T_Dict g on g.dictCateCode = 'gender' and g.dictCode = a.genderCode
+where
+	ea.eventCode =%(eventCode)s
+order by
+	o.orgName , a.athName
+
+select
+	a.* ,
+	o.orgName ,
+	g.dictName as genderName
+from T_Ath a
+join T_Event e on e.eventCode=%(eventCode)s and e.genderCode = a.genderCode
+join T_Org o on o.orgCode = a.orgCode
+join T_Dict g on g.dictCateCode = 'gender' and g.dictCode = a.genderCode
+where
+	(a.orgCode = %(orgCode)s or ''=%(orgCode)s)
+	and (
+	    (''=%(searchText)s) or
+	    ( a.athName like '%'+%(searchText)s+'%' ) or
+	    ( dbo.fun_getPY(a.athName) like '%'+%(searchText)s+'%' )
+	)
+	and not exists (
+		select * from T_EventAth ea where ea.athCode = a.athCode and ea.eventCode =%(eventCode)s
+	)
+order by a.athName

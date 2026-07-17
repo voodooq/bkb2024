@@ -1,0 +1,9 @@
+select top 1
+    gameId ,
+    gameCode ,
+    gameName ,
+    address ,
+    openDate ,
+    closeDate ,
+    gameDesc
+from T_Game

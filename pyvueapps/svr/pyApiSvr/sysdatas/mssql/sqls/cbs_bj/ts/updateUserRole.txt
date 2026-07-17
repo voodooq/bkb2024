@@ -1,0 +1,4 @@
+UPDATE T_UserRole
+SET
+    roleCode = COALESCE(NULLIF(%(roleCode)s, ''), roleCode)
+WHERE userCode = %(userCode)s;

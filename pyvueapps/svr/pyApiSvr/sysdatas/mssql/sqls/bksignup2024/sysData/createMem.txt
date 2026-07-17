@@ -1,0 +1,23 @@
+insert into T_TeamMem(
+	teamCode ,
+	memKey ,
+	functionCode ,
+	memName ,
+	genderCode ,
+	idTypeCode ,
+	idCode ,
+	tel ,
+	photoImg ,
+	idImgList
+)values(
+	%(teamCode)s ,
+    %(memKey)s ,
+	%(functionCode)s ,
+	%(memName)s ,
+	%(genderCode)s ,
+	%(idTypeCode)s ,
+	%(idCode)s ,
+	%(tel)s ,
+	%(photoImg)s ,
+	%(idImgList)s
+)

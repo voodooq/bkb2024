@@ -1,0 +1,31 @@
+select
+	e.F_EventID as eventId , e.F_XMLID as eventCode ,
+	isnull( i.F_IniDisPos ,0) as teamOrder ,
+	r.F_RegisterCode as teamCode ,
+	rd.F_PrintLongName as teamName
+from TR_Inscription i
+join TR_Register r on r.F_RegisterID = i.F_RegisterID
+join TR_Register_Des rd on r.F_RegisterID = rd.F_RegisterID  and rd.F_LanguageCode = 'CHN'
+join TS_Event e on e.F_EventID = i.F_EventID
+join TC_Delegation_Des dd on dd.F_DelegationID = r.F_DelegationID  and dd.F_LanguageCode = 'CHN'
+where e.F_XMLID =%(eventCode)s
+order by isnull( i.F_IniDisPos ,9999)  ;
+
+select
+	e.F_XMLID as eventCode ,
+	t.F_RegisterCode as teamCode ,
+	r.F_RegisterID as athId ,
+	r.F_RegisterCode as athCode ,
+	rd.F_PrintLongName as athName ,
+	d.F_DelegationCode as orgCode ,
+	dd.F_DelegationShortName as orgName
+from TR_Inscription i
+join TS_Event e on e.F_EventID = i.F_EventID
+join TR_Register t on t.F_RegisterID = i.F_RegisterID and t.F_RegTypeID = 3
+join TR_Register_Des td on td.F_RegisterID = t.F_RegisterID and td.F_LanguageCode = 'CHN'
+join TR_Register_Member m on i.F_RegisterID = m.F_RegisterID
+join TR_Register r on r.F_RegisterID = m.F_MemberRegisterID and r.F_RegTypeID = 1
+join TR_Register_Des rd on rd.F_RegisterID = r.F_RegisterID and rd.F_LanguageCode ='CHN'
+join TC_Delegation d on d.F_DelegationID = t.F_DelegationID
+join TC_Delegation_Des dd on d.F_DelegationID = dd.F_DelegationID and dd.F_LanguageCode ='CHN'
+where e.F_XMLID =%(eventCode)s;

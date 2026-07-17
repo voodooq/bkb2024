@@ -1,0 +1,1 @@
+select eventId,gameCode,eventOrder,eventCode,eventName,eventDesc from T_Event e where gameCode =%(gameCode)s  order by eventOrder

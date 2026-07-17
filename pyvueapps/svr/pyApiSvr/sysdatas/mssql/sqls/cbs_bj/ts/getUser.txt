@@ -1,0 +1,31 @@
+select
+	u.userId , u.userCode , u.nickName , u.userDesc , u.userStatus, ur.rolecode, dr.dictLabel,dr.exInfo
+from T_User u
+LEFT JOIN T_UserRole ur on ur.userCode = u.userCode 
+LEFT JOIN T_DictRole dr on dr.dictCode = ur.rolecode
+where 1=1
+AND (
+%(userCode)s = '' 
+    OR u.userCode = %(userCode)s
+)
+AND (
+%(nickName)s = '' 
+    OR u.nickName like '%'+%(nickName)s+'%'
+)
+AND (
+%(userDesc)s = '' 
+    OR u.userDesc like '%'+%(userDesc)s+'%'
+)
+AND (
+%(userStatus)s = '' 
+    OR u.userStatus = %(userStatus)s
+)
+AND (
+%(roleCode)s = '' 
+    OR ur.rolecode = %(roleCode)s
+) 
+AND (
+%(roleName)s = '' 
+    OR dr.dictLabel like '%'+%(roleName)s+'%'
+) 
+ORDER BY	u.userId desc

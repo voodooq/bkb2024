@@ -1,0 +1,1 @@
+exec proc_setStartJob %(matchCode)s , %(hora)s , %(jobCode)s , %(memberCode)s

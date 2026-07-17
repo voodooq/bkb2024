@@ -1,0 +1,10 @@
+update T_TeamMem set
+    weight =%(weight)s ,
+    height =%(height)s ,
+    width =%(width)s ,
+    bib =%(bib)s ,
+    birthday =%(birthday)s ,
+    masterName =%(masterName)s ,
+    masterRelation =%(masterRelation)s ,
+    masterTel =%(masterTel)s
+where memKey=%(memKey)s

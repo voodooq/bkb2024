@@ -1,0 +1,9 @@
+update T_Game set 
+gameName = %(gameName)s,
+gameDesc = %(gameDesc)s,
+gameDate = %(gameDate)s,
+openDate = %(openDate)s,
+closeDate = %(closeDate)s,
+addr = %(addr)s,
+company = %(company)s
+where  gameKey =%(gameKey)s

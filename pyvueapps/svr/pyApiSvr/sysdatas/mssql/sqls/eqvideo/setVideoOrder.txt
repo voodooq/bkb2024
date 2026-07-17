@@ -1,0 +1,1 @@
+update T_Res set resOrder=%(resOrder)s where resId=%(resId)s

@@ -1,0 +1,1 @@
+update T_Param set psValue =%(psValue)s where psId=%(psId)s

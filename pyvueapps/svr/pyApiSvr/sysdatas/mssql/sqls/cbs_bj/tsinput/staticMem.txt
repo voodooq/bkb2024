@@ -1,0 +1,9 @@
+select
+	itemCode , count(*) as matchCount
+from v_static_member where memCode=%(memCode)s and matchCode=%(matchCode)s
+group by itemCode
+
+select
+	itemCode , count(*) as sectionCount
+from v_static_member where memCode=%(memCode)s and matchCode=%(matchCode)s and sectionCode=%(sectionCode)s
+group by itemCode

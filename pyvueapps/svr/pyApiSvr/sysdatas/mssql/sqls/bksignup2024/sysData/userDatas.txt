@@ -1,0 +1,2 @@
+select * from T_Team where createUserCode=%(tel)s;
+select m.* from T_TeamMem m join T_Team t on t.teamKey = m.teamCode where t.createUserCode=%(tel)s;

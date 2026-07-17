@@ -1,0 +1,8 @@
+SELECT * 
+FROM T_Team 
+INNER JOIN T_Event ON T_Team.eventCode = T_Event.eventCode
+where T_Team.teamName like '%'+%(teamName)s+'%'
+AND (
+    %(eventCode)s = '' 
+    OR T_Team.eventCode = %(eventCode)s
+)

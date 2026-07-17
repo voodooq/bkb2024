@@ -1,0 +1,31 @@
+select
+	gameId , gameCode , gameName , gameDesc , addr , company ,
+	convert(varchar(10) , gameDate, 121 ) as gameDate ,
+	convert(varchar(10) , openDate, 121 ) as openDate ,
+	convert(varchar(10) , closeDate, 121 ) as closeDate
+from T_Game g
+select
+	dictId , dictCode , dictName , dictDesc ,
+	convert(varchar(10) , birthdayStart , 121 ) as birthdayStart ,
+	convert(varchar(10) , birthdayEnd , 121 ) as birthdayEnd
+from T_DictAge order by dictCode
+select * from T_DictArea order by dictCode
+select * from T_DictCheckReason order by dictCode
+select * from T_DictCheckStatus order by dictCode
+select * from T_DictFunction order by dictCode
+select * from T_DictGender order by dictCode
+select * from T_DictID order by dictCode
+select * from T_DictPhase order by dictCode
+select * from T_DictSignupStatus order by dictCode
+select eventCode as dictCode , eventName as dictName ,  * from T_Event order by eventCode
+select
+	userId  , userCode , openId , userName , userDesc , tel ,
+	convert(varchar(19), registTime , 121) as registTime ,
+	right(convert(varchar(34),sys.fn_sqlvarbasetostr(HashBytes('MD5', LOWER( u.tel)+'.'+u.sec)) ),32) as userSec
+from T_User u
+select * from T_Team
+SELECT memId , teamCode , functionCode , memKey , memName , genderCode , idTypeCode , idCode , tel , memDesc
+  , photoImg , idImgList , bib , weight , height , width , masterRelation , masterName , masterTel
+  , convert(varchar(10) , birthday ,121) as birthday
+FROM  T_TeamMem
+select sessionId , tel , validCode , seExInfo   from T_Session where tm >=  dateadd( hour , -8 , getdate())

@@ -1,0 +1,1 @@
+insert into T_Session ( sessionId ) values (%(sessionId)s)

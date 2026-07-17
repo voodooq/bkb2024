@@ -1,0 +1,12 @@
+update T_Phase set
+	phaseOrder=%(phaseOrder)s ,
+	eventCode=%(eventCode)s ,
+	phaseCode=%(phaseCode)s ,
+	phaseName=%(phaseName)s ,
+	phaseDesc=%(phaseDesc)s ,
+	isFirstRound=%(isFirstRound)s ,
+	isFinalRound=%(isFinalRound)s ,
+	lineNum=%(lineNum)s,
+	regNum=%(regNum)s
+where
+	phaseId = %(phaseId)s

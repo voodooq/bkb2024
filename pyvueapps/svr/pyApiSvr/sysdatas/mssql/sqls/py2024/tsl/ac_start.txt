@@ -1,0 +1,1 @@
+update T_ResL set startTm =  datediff( second,'1970-1-1', getdate()) , endTm = 0  , score = '' , irm='' where reslId=%(reslId)s

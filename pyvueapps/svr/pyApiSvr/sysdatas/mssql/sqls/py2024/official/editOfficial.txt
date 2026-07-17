@@ -1,0 +1,8 @@
+  update T_Official set
+	officialCode = %(officialCode)s,
+	officialName = %(officialName)s,
+	officialDesc = %(officialDesc)s,
+	genderCode = %(genderCode)s,
+	birthday = %(birthday)s
+where
+	officialId=%(officialId)s

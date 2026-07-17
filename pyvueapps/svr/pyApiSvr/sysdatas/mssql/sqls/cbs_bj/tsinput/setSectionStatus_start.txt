@@ -1,0 +1,7 @@
+update T_Section set
+	endtime = null ,
+	startTime = case
+		when %(tm)s = '' then getdate()
+		else convert(datetime, %(tm)s)
+	end
+where sectionCode =%(sectionCode)s and startTime is null and endTime is null

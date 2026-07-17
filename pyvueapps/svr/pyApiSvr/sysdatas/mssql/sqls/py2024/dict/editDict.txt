@@ -1,0 +1,12 @@
+
+update T_Dict set 
+	dictCateCode=%(dictCateCode)s ,
+	dictOrder=%(dictOrder)s ,
+	dictCode=%(dictCode)s ,
+	dictName=%(dictName)s ,
+	dictDesc=%(dictDesc)s ,
+	dictEx1=%(dictEx1)s ,
+	dictEx2=%(dictEx2)s ,
+	dictEx3=%(dictEx3)s 
+where 
+	dictId=%(dictId)s

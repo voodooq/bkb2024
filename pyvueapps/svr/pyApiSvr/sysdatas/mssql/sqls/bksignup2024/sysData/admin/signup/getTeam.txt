@@ -1,0 +1,20 @@
+SELECT T_Team.*,T_DictArea.dictName,T_Event.eventName,count(T_TeamMem.memId) as 'memNum'
+FROM T_Team 
+INNER JOIN T_TeamMem ON T_TeamMem.teamCode = T_Team.teamKey
+INNER JOIN T_Event ON T_Team.eventCode = T_Event.eventCode
+INNER JOIN T_DictArea ON T_Team.areaCode = T_DictArea.dictCode
+where T_Team.teamName like '%'+%(teamName)s+'%'
+AND (
+    %(signupStatusCode)s = '' 
+    OR T_Team.signupStatusCode = %(signupStatusCode)s
+)
+AND (
+    %(eventCode)s = '' 
+    OR T_Team.eventCode = %(eventCode)s
+)
+AND (
+    %(areaCode)s = '' 
+    OR T_Team.areaCode = %(areaCode)s
+)
+AND T_TeamMem.functionCode = '01'
+GROUP BY T_Team.areaCode,T_Team.checkDesc,T_Team.checkStatusCode,T_Team.createUserCode,T_Team.eventCode,T_Team.logoImg,T_Team.openid,T_Team.payStatus,T_Team.phaseCode,T_Team.signupStatusCode,T_Team.teamCode,T_Team.teamDesc,T_Team.teamExInfo,T_Team.teamId,T_Team.teamKey,T_Team.teamName,T_Team.transaction_id,T_DictArea.dictName,T_Event.eventName

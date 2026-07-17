@@ -1,0 +1,6 @@
+select 
+	resBId , resId , line , startTm , endTm , z1 , z2 , z3 , t 
+From T_ResB
+where 
+	resId =%(resId)s and line =%(line)s 
+order by startTm ;

@@ -1,0 +1,5 @@
+--select * from v_user where userCode=lower(%(userCode)s) and userRole=lower(%(userRole)s)  and  userSec = lower(@(userSec)s)
+select * from V_User where
+    lower(userCode) = lower(%(userCode)s) and
+    lower(userRole) = lower(%(userRole)s) and
+    lower(userSec) = lower(%(userSec)s)

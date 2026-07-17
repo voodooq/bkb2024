@@ -1,0 +1,17 @@
+老发布地址 数据源【导出的.txt静态文件】 全国赛使用
+
+http://yingyue.hhdata.cn:10052/web/mgameList.html
+
+认证赛事使用版本 数据来源 http://yingyue.hhdata.cn:10085/index.html 数据存储过程转换出来的
+https://fencingcert.yy-sport.com.cn/real-score/#/
+
+之前重做的发布 数据源【导出的.txt静态文件】 未完成 
+http://47.92.172.14:10081/ 
+
+
+巴黎奥运会 击剑成绩发布
+https://olympics.com/zh/paris-2024/schedule/fencing?day=27-july
+
+
+fie 成绩展示
+https://fie.org/competitions/2024/451

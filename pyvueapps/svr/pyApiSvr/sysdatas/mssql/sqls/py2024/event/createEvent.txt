@@ -1,0 +1,19 @@
+
+insert into T_Event (
+	eventOrder ,
+	eventCode ,
+	eventName ,
+	eventDesc ,
+	sportItemCode  ,
+	genderCode ,
+	groupCode
+)
+values (
+	%(eventOrder)s ,
+	%(eventCode)s ,
+	%(eventName)s ,
+	%(eventDesc)s ,
+	%(sportItemCode)s  ,
+	%(genderCode)s ,
+	%(groupCode)s
+)

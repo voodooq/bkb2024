@@ -1,0 +1,1 @@
+DELETE T_DictRole where dictId = %(dictId)s

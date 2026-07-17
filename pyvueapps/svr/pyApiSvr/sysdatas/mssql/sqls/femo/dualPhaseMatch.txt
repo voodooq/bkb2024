@@ -1,0 +1,54 @@
+select
+	m.F_PhaseID as phaseId ,
+	m.F_Order as matchOrder ,
+	m.F_MatchCode as matchCode ,
+	FORMAT(m.F_StartTime, 'HH:mm') as startTime,
+	tccd.F_CourtShortName as piste,
+	-- 执裁裁判
+	isnull ('RE:'+ref.RefereeInfo,'') as referee,
+	isnull ('VR:'+vref.RefereeInfo,'') as videoReferee,
+
+	hmr.F_RegisterID as homeRegId ,
+	hrd.F_PrintShortName as homeAthName,
+	hdd.F_DelegationShortName as homeOrgName,
+	hmr.F_WinPoints as homwPoints ,
+	hmr.F_WinSets as homeWinSets,
+
+	amr.F_RegisterID as awayRegId ,
+	ard.F_PrintShortName as awayAthName,
+	[add].F_DelegationShortName as awayOrgName ,
+	amr.F_WinPoints as awayPoints ,
+	amr.F_WinSets as awayWinSets
+from TS_Match m
+left join TC_Court_Des tccd on m.F_CourtID=tccd.F_CourtID AND tccd.F_LanguageCode ='CHN'
+-- referee
+left join (select TSRS.F_MatchID,STRRD.F_PrintShortName+'('+STCDD.F_DelegationShortName+')' as RefereeInfo
+from TS_RoundServant as TSRS
+LEFT JOIN TR_Register as STRR on TSRS.F_RegisterID=STRR.F_RegisterID
+LEFT JOIN TR_Register_Des as STRRD on STRR.F_RegisterID=STRRD.F_RegisterID and STRRD.F_LanguageCode='CHN'
+LEFT JOIN TC_Delegation_Des as STCDD on STRR.F_DelegationID=STCDD.F_DelegationID and STCDD.F_LanguageCode='CHN'
+where TSRS.F_FunctionID=1 and TSRS.F_MatchID is not null
+) as ref on ref.F_MatchID=m.F_MatchID
+-- video referee
+left join (select TSRS.F_MatchID,STRRD.F_PrintShortName+'('+STCDD.F_DelegationShortName+')' as RefereeInfo
+from TS_RoundServant as TSRS
+LEFT JOIN TR_Register as STRR on TSRS.F_RegisterID=STRR.F_RegisterID
+LEFT JOIN TR_Register_Des as STRRD on STRR.F_RegisterID=STRRD.F_RegisterID and STRRD.F_LanguageCode='CHN'
+LEFT JOIN TC_Delegation_Des as STCDD on STRR.F_DelegationID=STCDD.F_DelegationID and STCDD.F_LanguageCode='CHN'
+where TSRS.F_FunctionID=4 and TSRS.F_MatchID is not null
+) as vref on vref.F_MatchID=m.F_MatchID
+-- home
+left join TS_Match_Result hmr on hmr.F_HomeAway = 1 and hmr.F_MatchID = m.F_MatchID
+left join TR_Register hr on hr.F_RegisterID = hmr.F_RegisterID
+left join TR_Register_Des hrd on hr.F_RegisterID = hrd.F_RegisterID and hrd.F_LanguageCode ='CHN'
+left join TC_Delegation hd on hd.F_DelegationID = hr.F_DelegationID
+left join TC_Delegation_Des hdd on hdd.F_DelegationID = hd.F_DelegationID and hdd.F_LanguageCode = 'CHN'
+-- away
+left join TS_Match_Result amr on amr.F_HomeAway = 2 and amr.F_MatchID = m.F_MatchID
+left join TR_Register ar on ar.F_RegisterID = amr.F_RegisterID
+left join TR_Register_Des ard on ar.F_RegisterID = ard.F_RegisterID and ard.F_LanguageCode ='CHN'
+left join TC_Delegation ad on ad.F_DelegationID = ar.F_DelegationID
+left join TC_Delegation_Des [add] on [add].F_DelegationID = ad.F_DelegationID and [add].F_LanguageCode = 'CHN'
+-- where m.F_PhaseID =8565
+where m.F_PhaseID =%(phaseId)s
+order by m.F_PhaseID , m.F_Order

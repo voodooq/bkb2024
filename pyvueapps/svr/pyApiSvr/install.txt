@@ -1,0 +1,5 @@
+pip install pymysql  -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install DBUtils==1.3  -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install pymssql  -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install fastapi uvicorn  -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install pydantic  -i https://pypi.tuna.tsinghua.edu.cn/simple

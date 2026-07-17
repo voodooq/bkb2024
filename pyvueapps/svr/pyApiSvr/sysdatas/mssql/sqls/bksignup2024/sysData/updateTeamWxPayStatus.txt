@@ -1,0 +1,6 @@
+update T_Team set
+    payStatus =%(payStatus)s ,
+    transaction_id =%(transaction_id)s ,
+    openid =%(openid)s ,
+    signupStatusCode  = 1
+where teamKey=%(teamKey)s

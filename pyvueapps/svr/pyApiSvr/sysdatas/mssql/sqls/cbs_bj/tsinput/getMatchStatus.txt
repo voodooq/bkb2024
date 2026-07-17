@@ -1,0 +1,1 @@
+select * from v_status_match where matchCode=%(matchCode)s

@@ -1,0 +1,15 @@
+select
+	p.* ,
+	e.eventName ,
+	case
+		when p.isFirstRound = 1 then N'是'
+		else '否'
+	end as isFirst ,
+	case
+		when p.isFinalRound = 1 then N'是'
+		else '否'
+	end as isFinal
+from T_Phase p
+join T_Event e on e.eventCode = p.eventCode
+where p.eventCode=%(eventCode)s
+order by p.phaseOrder

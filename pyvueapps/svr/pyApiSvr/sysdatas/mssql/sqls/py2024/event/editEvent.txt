@@ -1,0 +1,10 @@
+update T_Event set
+	eventCode = %(eventCode)s ,
+	eventOrder = %(eventOrder)s ,
+	eventName = %(eventName)s ,
+	eventDesc = %(eventDesc)s ,
+	genderCode = %(genderCode)s ,
+	groupCode = %(groupCode)s ,
+	sportItemCode = %(sportItemCode)s
+where
+eventId = %(eventId)s

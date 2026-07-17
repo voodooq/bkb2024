@@ -1,0 +1,1 @@
+update T_Match set totalNo=%(totalNo)s where matchCode=%(matchCode)s

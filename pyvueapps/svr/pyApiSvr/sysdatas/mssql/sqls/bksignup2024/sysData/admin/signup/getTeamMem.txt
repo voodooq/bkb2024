@@ -1,0 +1,4 @@
+select T_TeamMem.*,T_Team.*
+From T_TeamMem,T_Team where T_TeamMem.teamCode = T_Team.teamCode
+and T_TeamMem.teamCode = %(teamCode)s
+and T_TeamMem.memName like '%'+%(memName)s+'%'

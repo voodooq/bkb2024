@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: bkb_server_app:latest
+    container_name: bkb_server
+    restart: always
+    ports:
+      - "31016:31503"
+      - "31017:8010"
+    volumes:
+      - ./pyvueapps:/pyvueapps:rw
+    # NOTE: 敏感凭证通过 .env 文件注入，不在代码中硬编码
+    env_file:
+      - .env
+    environment:
+      - TZ=Asia/Shanghai
+      - LOG_LEVEL=WARNING
+    # NOTE: 限制日志大小，防止 stdout 日志无限增长导致磁盘 I/O 压力
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    # NOTE: 资源限制兜底，防止异常情况下吃光宿主机资源
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G

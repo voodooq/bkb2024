@@ -1,0 +1,6 @@
+MERGE INTO T_DictRole AS target
+USING (SELECT %(dictOrder)s AS dictOrder, %(dictCode)s AS dictCode, %(dictLabel)s AS dictLabel, %(exInfo)s AS exInfo, %(dictDesc)s AS dictDesc) AS source
+ON target.dictCode = source.dictCode
+WHEN NOT MATCHED THEN
+  INSERT (dictOrder, dictCode, dictLabel, exInfo, dictDesc)
+  VALUES (source.dictOrder, source.dictCode, source.dictLabel, source.exInfo, source.dictDesc);

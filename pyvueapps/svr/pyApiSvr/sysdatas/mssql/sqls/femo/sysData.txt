@@ -1,0 +1,53 @@
+select
+	g.F_SportID as gameId ,
+	g.F_SportCode as gameCode ,
+	gd.F_SportShortName as gameName ,
+	(
+		select top 1 vd.F_VenueShortName From TC_Venue v join TC_Venue_Des vd on vd.F_VenueID = v.F_VenueID
+	) as [address],
+	convert(varchar(10), g.F_OpenDate, 121) as openDate,
+	convert(varchar(10), g.F_CloseDate, 121) as closeDate ,
+	g.F_DisciplineCode as gameDesc
+from TS_Sport g
+join TS_Sport_Des gd on g.F_SportID = gd.F_SportID and gd.F_LanguageCode = 'CHN';
+
+
+select * from  (
+	select 1 as [order] , 'F' as code , N'花剑'   as [name] union
+	select 2 as [order] , 'E' as code , N'重剑'   as [name] union
+	select 3 as [order] , 'S' as code , N'佩剑'   as [name]
+) a order by [order];
+
+select * from  (
+	select 'M' as code , N'男子'   as [name] union
+	select 'W' as code , N'女子'   as [name]
+) a;
+
+select * from  (
+	select 2 as [order] , 'T' as code , N'团体赛'   as [name] union
+	select 1 as [order] , 'I' as code , N'个人赛'   as [name]
+) a order by [order];
+
+
+select
+	e.F_EventID as eventId ,
+	e.F_XMLID as eventCode  ,
+	e.F_Order as eventOrder ,
+	ed.F_EventShortName as eventName,
+	s.F_GenderCode  as genderCode ,
+	e.F_WeaponType as weaponCode ,
+	e.F_Category as categoryCode ,
+	case
+		when e.F_PlayerRegTypeID = 1 then 'I'
+		when e.F_PlayerRegTypeID = 3 then 'T'
+		else ''
+	end as typeCode,
+	convert(varchar(10), F_OpenDate , 121) as openDate ,
+	convert(varchar(8) ,F_OpenDate , 108) as openTime
+	, case when isnull( poolPhase.poolPhaseCount,0)>0 then 1 else 0 end as hasPool
+from TS_Event  e join TS_Event_Des ed on ed.F_LanguageCode='CHN' and e.F_EventID = ed.F_EventID
+join TC_Sex s on s.F_SexCode = e.F_SexCode
+left join (
+	select F_EventID , count(*) as poolPhaseCount from TS_Phase where F_PhaseType = 1 and F_Level>0 group by F_EventID
+) poolPhase on poolPhase.F_EventID = e.F_EventID
+order by e.F_Order;

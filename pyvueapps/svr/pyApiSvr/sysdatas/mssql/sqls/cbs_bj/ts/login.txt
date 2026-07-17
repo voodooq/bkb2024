@@ -1,0 +1,8 @@
+select
+	u.userId , u.userCode , u.nickName , u.userDesc , u.userStatus ,
+	right(sys.fn_sqlvarbasetostr(HASHBYTES('MD5',lower(u.userCode)+u.pwd)),32) as userSec
+from T_User u
+join T_UserRole  ur on ur.userCode = u.userCode and ur.roleCode = 'static' and u.userStatus = 1
+where
+	trim(right(sys.fn_sqlvarbasetostr(HASHBYTES('MD5',lower(u.userCode)+u.pwd)),32)) =
+	trim(%(userSec)s)

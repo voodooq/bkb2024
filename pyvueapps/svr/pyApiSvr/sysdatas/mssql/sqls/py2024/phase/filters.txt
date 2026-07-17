@@ -1,0 +1,3 @@
+select dictCode as value , dictName as label  from T_Dict where dictCateCode='group' order by dictOrder
+select dictCode as value , dictName as label  from T_Dict where dictCateCode='sportItem' order by dictOrder
+select * , eventCode as value , eventName as label  from T_Event order by eventOrder

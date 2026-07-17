@@ -1,0 +1,2 @@
+select * from T_Event where eventCode=%(eventCode)s
+select * from T_Dict where dictCateCode='officialType' order by dictOrder

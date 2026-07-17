@@ -1,0 +1,7 @@
+select
+	d.*
+	, c.cateName
+from T_Dict d
+join T_DictCategory c on c.cateCode = d.dictCateCode
+
+where d.dictCateCode=%(cateCode)s order by dictOrder

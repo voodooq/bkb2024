@@ -1,0 +1,8 @@
+update T_MatchMember set
+	startJobCode=%(jobCode)s ,
+	curJobCode=%(jobCode)s ,
+	inFlag = case
+		when %(jobCode)s = '' then 0
+		else 1
+	end
+where matchCode =%(matchCode)s and memCode=%(memCode)s

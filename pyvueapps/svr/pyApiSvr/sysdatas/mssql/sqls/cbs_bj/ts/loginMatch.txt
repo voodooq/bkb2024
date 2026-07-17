@@ -1,0 +1,12 @@
+select
+	u.userId , u.userCode , u.nickName , u.userDesc , u.userStatus ,
+	UPPER(CONVERT(VARCHAR(32), HASHBYTES('MD5', CONVERT(VARCHAR(MAX), u.userCode + u.pwd)), 2)) AS MD5Hash,
+	ur.rolecode,
+	dr.dictLabel,
+	dr.exInfo
+from T_User u
+LEFT JOIN T_UserRole ur on ur.userCode = u.userCode and u.userStatus = 1
+LEFT JOIN T_DictRole dr on dr.dictCode = ur.rolecode
+where
+	trim(UPPER(CONVERT(VARCHAR(32), HASHBYTES('MD5', CONVERT(VARCHAR(MAX), u.userCode + u.pwd)), 2))) =
+	trim(%(userSec)s)

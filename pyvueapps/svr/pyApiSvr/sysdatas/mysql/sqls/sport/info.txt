@@ -1,0 +1,3 @@
+
+SELECT * FROM ts_sports WHERE SportLevelCode=%(code)s;
+select * from ts_sports;

@@ -1,0 +1,8 @@
+UPDATE T_DictRole
+SET
+    dictOrder = COALESCE(NULLIF(%(dictOrder)s, ''), dictOrder),
+    dictCode = COALESCE(NULLIF(%(dictCode)s, ''), dictCode),
+    dictLabel = COALESCE(NULLIF(%(dictLabel)s, ''), dictLabel),
+    exInfo = COALESCE(NULLIF(%(exInfo)s, ''), exInfo),
+    dictDesc = COALESCE(NULLIF(%(dictDesc)s, ''), dictDesc)
+WHERE dictId = %(dictId)s;

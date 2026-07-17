@@ -1,0 +1,5 @@
+SELECT * 
+FROM T_Team 
+INNER JOIN T_Event ON T_Team.eventCode = T_Event.eventCode
+INNER JOIN T_DictArea ON T_Team.areaCode = T_DictArea.dictCode
+where T_Team.teamName like '%'+%(teamName)s+'%'

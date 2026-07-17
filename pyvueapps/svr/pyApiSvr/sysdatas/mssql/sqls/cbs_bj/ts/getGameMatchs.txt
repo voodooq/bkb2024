@@ -1,0 +1,19 @@
+select matchId,phaseCode,totalNo,matchOrder,matchCode,matchDesc,homeCode,homeIRM,homeRes,homeWin,awayCode,awayIRM,awayRes,awayWin,sectionNum,planTime,matchStatus,addSectionFlag,homeName,homeImgUrl,awayName,awayImgUrl,gameCode,gameName,Address,gameDesc,gameOpenDt,gameCloseDt,eventCode,eventOrder,eventName,eventDesc,phaseOrder,phaseName,matchNum,phaseDesc,matchPlanDt,matchPlanDate,matchPlanTime from v_info_match  
+where gameCode=%(gameCode)s 
+AND (
+%(matchCode)s = '' 
+    OR matchCode = %(matchCode)s
+) 
+AND (
+%(eventCode)s = '' 
+    OR eventCode = %(eventCode)s
+) 
+AND (
+%(phaseCode)s = '' 
+    OR phaseCode = %(phaseCode)s
+) 
+AND (
+%(matchStatus)s = '' 
+    OR matchStatus = %(matchStatus)s
+) 
+order by eventOrder , phaseOrder , matchOrder

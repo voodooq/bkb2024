@@ -1,0 +1,6 @@
+select
+	u.userCode ,
+	u.userName
+From T_User u
+where userCode   = %(userCode)s;
+select userId , userCode , userName  from T_User;

@@ -1,0 +1,5 @@
+select
+	s.* 
+from T_Section s
+where s.matchCode = %(matchCode)s
+order by s.sectionOrder

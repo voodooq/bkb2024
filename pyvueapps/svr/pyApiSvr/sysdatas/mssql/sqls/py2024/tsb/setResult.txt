@@ -1,0 +1,10 @@
+update T_ResB set 
+	z1=%(z1)s ,
+	z2=%(z2)s ,
+	z3=%(z3)s ,
+	t=%(t)s ,
+	endTm = case 
+		when t = 1 then datediff( second,'1970-1-1', getdate()) 
+		else endTm
+	end 
+where resBId =%(id)s

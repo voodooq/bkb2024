@@ -1,0 +1,7 @@
+EXEC proc_InsertMemberData
+    @memCode = %(memCode)s,
+    @memName = %(memName)s,
+    @teamCode = %(teamCode)s,
+    @bibCode = %(bibCode)s,
+    @matchCode = %(matchCode)s,
+    @hora = %(hora)s;

@@ -1,0 +1,13 @@
+INSERT INTO T_Server(
+	serverCode ,
+	serverHost ,
+	serverPort ,
+	serverDesc ,
+	appPath
+) VALUES (
+	%(serverCode)s ,
+	%(serverHost)s ,
+	%(serverPort)s ,
+	%(serverDesc)s ,
+	%(appPath)s
+)

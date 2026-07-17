@@ -1,0 +1,14 @@
+select
+	e.* ,
+	s.dictName as  sportItemName ,
+	g.dictName as  groupName ,
+	ge.dictName as  genderName
+from T_Event e
+join T_Dict s on s.dictCateCode='sportItem' and s.dictCode = e.sportItemCode
+join T_Dict g on g.dictCateCode='group' and g.dictCode = e.groupCode
+join T_Dict ge on ge.dictCateCode='gender' and ge.dictCode = e.genderCode
+where
+	(e.genderCode =%(genderCode)s or  %(genderCode)s='All') and
+	(e.groupCode =%(groupCode)s or  %(groupCode)s='All') and
+	(e.sportItemCode =%(sportItemCode)s or  %(sportItemCode)s='All')
+order by e.eventOrder

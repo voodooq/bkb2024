@@ -1,0 +1,10 @@
+select *  from V_User
+join T_Game g on g.gameCode = %(gameCode)s
+where
+    lower(userCode) = lower(%(userCode)s) and
+    lower(userRole) = lower(%(userRole)s) and
+    lower(userSec) = lower(%(userSec)s);
+
+select * from T_Event;
+select * from T_Phase;
+

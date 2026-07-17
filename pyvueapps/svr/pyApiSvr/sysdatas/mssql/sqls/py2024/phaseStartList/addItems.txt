@@ -1,0 +1,10 @@
+insert into T_Res( athCode , phaseCode)
+select
+	athCode , %(phaseCode)s as phaseCode
+from T_Ath a
+where
+	athCode in (
+		select [value] as athCode from openjson(%(codes)s)
+	) and not exists (
+		select * from T_Res r where r.phaseCode=%(phaseCode)s and athCode = a.athCode
+	)

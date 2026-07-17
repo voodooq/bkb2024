@@ -1,0 +1,17 @@
+update T_Res set
+       [orgName] = %(orgName)s
+      ,[athName] = %(athName)s
+      ,[athGender] = %(athGender)s
+      ,[birthday] = %(birthday)s
+      ,[coach] = %(coach)s
+      ,[athCode] = %(athCode)s
+      ,[athFeId] = %(athFeId)s
+      ,[tel] = %(tel)s
+      ,[horseName] = %(horseName)s
+      ,[horseChip] = %(horseChip)s
+      ,[horseFeId] = %(horseFeId)s
+      ,[horseCode] = %(horseCode)s
+      ,[horseAge] = %(horseAge)s
+      ,[spareHorse]  = %(spareHorse)s
+where
+	resId=%(resId)s

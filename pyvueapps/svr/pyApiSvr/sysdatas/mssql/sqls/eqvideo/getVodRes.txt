@@ -1,0 +1,8 @@
+select * from T_Res
+where
+gameCode =%(gameCode)s and
+eventCode =%(eventCode)s and
+phaseCode =%(phaseCode)s
+and vodFlag >0
+
+order by startTm desc

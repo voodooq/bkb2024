@@ -1,0 +1,34 @@
+select
+	r.*
+	, case
+		when startTm=0  then 0
+		when startTm>0 and endTm=0  then 1
+		when startTm>0 and endTm>0  then 2
+		else 9
+	end as resStatus
+	, case
+		when startTm=0  then N'未开始'
+		when startTm>0 and endTm=0  then N'进行中'
+		when startTm>0 and endTm>0  then N'已完成'
+		else N''
+	end as resStatusName
+	, e.eventName
+	, p.phaseName
+	, startTm - 8 * 3600 +440 as tmFrom ,endTm-8*3600+440 as tmEnd
+	, r.gameCode +'_'+convert(varchar(10), r.resId) as videoCode
+	, case
+		when r.endTm>0 then replace(g.vodUrl ,'{resId}', convert(varchar(100), r.resId) )
+		else ''
+	end as vodUrl,
+    startTm - 8*3600 as utcStart,
+    endTm - 8*3600 as utcEnd,
+    convert(varchar(8), dateadd(second , startTm , '1970-1-1'), 108) as timeStr,
+    endTm - startTm as duration
+from T_Res r
+join T_Event e on e.eventCode = r.eventCode
+join T_Phase p on p.phaseCode = r.phaseCode
+join T_Game g on g.gameCode = r.gameCode
+where
+	r.eventCode=%(eventCode)s and
+	r.phaseCode=%(phaseCode)s
+order by r.resOrder

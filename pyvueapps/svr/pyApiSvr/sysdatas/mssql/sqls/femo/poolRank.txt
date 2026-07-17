@@ -1,0 +1,31 @@
+
+select
+	e.F_EventID as eventId ,
+	e.F_XMLID as eventCode ,
+	e.F_PoolQualifyNo as eventPoolQualifyNo,
+	poolRank.rankOrder as displayOrder ,
+	poolRank.poolRank as poolRank  ,
+	r.F_RegisterCode as athCode ,
+	dd.F_DelegationShortName ,
+	rd.F_PrintLongName ,
+	pr.F_MatchCount as m  ,
+	pr.F_IndexChar as indexWin ,
+	pr.F_Diff as diff ,
+	pr.F_TcGive as hs ,
+	pr.F_TcReceive hr ,
+	case
+		when isnull(poolRank.poolRank,0)>0 and isnull(poolRank.poolRank,0) <=e.F_PoolQualifyNo  then 1
+		else 0
+	end as qualify
+from TS_Phase_Result pr
+join TS_Phase p on p.F_PhaseID = pr.F_PhaseID   and p.F_Level = 1
+join TS_Event e on e.F_EventID = p.F_EventID
+join TR_Register r on r.F_RegisterID = pr.F_RegisterID
+join(
+	select F_RegisterID as regId , a.F_PhaseDisplayPos as rankOrder , a.F_PhaseRank as poolRank , p.F_EventID as eventId  from TS_Phase_Result a join TS_Phase p on p.F_PhaseID = a.F_PhaseID where p.F_Level = 0
+) poolRank on poolRank.regId = r.F_RegisterID and poolRank.eventId = e.F_EventID
+join TR_Register_Des rd on rd.F_RegisterID = r.F_RegisterID and rd.F_LanguageCode='CHN'
+join TC_Delegation d on d.F_DelegationID = r.F_DelegationID
+join TC_Delegation_Des dd on dd.F_DelegationID = d.F_DelegationID and dd.F_LanguageCode='CHN'
+where e.F_XMLID = %(eventCode)s
+order by eventId ,  isnull(poolRank.poolRank,999999), isnull(poolRank.rankOrder,999999)

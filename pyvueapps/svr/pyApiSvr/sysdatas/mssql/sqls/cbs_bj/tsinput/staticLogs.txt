@@ -1,0 +1,11 @@
+select
+	l.* ,
+	convert(varchar(8), l.Tm,108) as t,
+    tm.bibCode , m.memName ,
+	si.itemLabel
+from v_static_member l
+join T_DictStaticItem si on si.itemCode = l.itemCode
+join T_TeamMember tm on tm.teamCode = l.teamCode and tm.memCode = l.memCode
+join T_Member m on m.memCode = l.memCode
+where matchCode =%(matchCode)s
+order by l.Tm desc

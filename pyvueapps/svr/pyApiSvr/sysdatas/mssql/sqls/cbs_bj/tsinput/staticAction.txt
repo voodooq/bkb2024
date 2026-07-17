@@ -1,0 +1,10 @@
+
+  insert into T_MemStatic ( matchCode , memCode , actionCode , Tm) values (
+	%(matchCode)s ,
+	%(memCode)s,
+	%(actionCode)s ,
+	case 
+		when %(tm)s = '' then getdate() 
+		else convert(datetime, %(tm)s)
+	end 
+  )

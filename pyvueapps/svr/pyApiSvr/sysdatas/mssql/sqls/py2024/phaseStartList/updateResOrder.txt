@@ -1,0 +1,8 @@
+update T_Res set resOrder = a.resOrder
+	from (
+		select * from openJson(%(orders)s) with (
+			resId int ,
+			resOrder int
+		)
+	) a
+	where a.resId = T_Res.resId

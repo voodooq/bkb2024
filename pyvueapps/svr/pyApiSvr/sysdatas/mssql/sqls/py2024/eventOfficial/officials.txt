@@ -1,0 +1,18 @@
+select
+	a.* ,
+	o.orgName
+from T_Official a join T_Org o on o.orgCode = a.orgCode
+where not exists(
+	select * from T_EventOfficial eo where eo.officialCode = a.officialCode and eo.eventCode = %(eventCode)s
+)
+order by a.officialName;
+select
+	eo.* ,
+	o.officialName ,
+	f.dictName as functionName ,
+	g.orgName
+from T_EventOfficial eo
+join T_Official o on o.officialCode = eo.officialCode
+join T_Dict f on f.dictCateCode = 'officialType' and f.dictCode = eo.functionCode
+join T_Org g on g.orgCode = o.orgCode
+where eo.eventCode = %(eventCode)s;

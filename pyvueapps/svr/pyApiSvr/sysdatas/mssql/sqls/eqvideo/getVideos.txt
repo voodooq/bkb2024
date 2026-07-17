@@ -1,0 +1,28 @@
+select
+	r.*
+	, case
+		when startTm=0  then 0
+		when startTm>0 and endTm=0  then 1
+		when startTm>0 and endTm>0  then 2
+		else 9
+	end as resStatus
+	, case
+		when startTm=0  then N'未开始'
+		when startTm>0 and endTm=0  then N'进行中'
+		when startTm>0 and endTm>0  then N'已完成'
+		else N''
+	end as resStatusName
+	, e.eventName
+	, p.phaseName
+from T_Res r
+join T_Event e on e.eventCode = r.eventCode
+join T_Phase p on p.phaseCode = r.phaseCode
+where
+	case
+		when startTm=0  then 0
+		when startTm>0 and endTm=0  then 1
+		when startTm>0 and endTm>0  then 2
+		else 9
+	end > 0 and
+	r.eventCode=%(eventCode)s and
+	r.phaseCode=%(phaseCode)s

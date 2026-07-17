@@ -1,0 +1,1 @@
+delete T_Team where teamKey=%(teamKey)s

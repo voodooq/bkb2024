@@ -1,0 +1,2 @@
+update T_Match set matchStatus = '1'
+where matchCode =%(matchCode)s

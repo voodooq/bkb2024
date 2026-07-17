@@ -1,0 +1,7 @@
+update T_Org set
+	orgOrder = %(orgOrder)s ,
+	orgCode = %(orgCode)s ,
+	orgName = %(orgName)s ,
+	orgDesc = %(orgDesc)s ,
+	orgTypeCode = %(orgTypeCode)s
+where orgId = %(orgId)s

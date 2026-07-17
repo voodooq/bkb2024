@@ -1,0 +1,7 @@
+UPDATE T_User
+SET
+    nickname = COALESCE(NULLIF(%(nickname)s, ''), nickname),
+    pwd = COALESCE(NULLIF(%(pwd)s, ''), pwd),
+    userDesc = COALESCE(NULLIF(%(userDesc)s, ''), userDesc),
+    userStatus = COALESCE(NULLIF(%(userStatus)s, ''), userStatus)
+WHERE userId = %(userId)s;

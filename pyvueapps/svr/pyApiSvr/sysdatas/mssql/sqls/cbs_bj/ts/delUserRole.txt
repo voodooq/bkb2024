@@ -1,0 +1,1 @@
+DELETE T_UserRole where userCode = %(userCode)s

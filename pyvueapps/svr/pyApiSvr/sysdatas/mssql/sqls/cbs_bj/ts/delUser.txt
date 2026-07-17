@@ -1,0 +1,1 @@
+DELETE T_User where userId = %(userId)s

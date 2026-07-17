@@ -1,0 +1,16 @@
+
+  insert into T_Ath(
+	athCode ,
+	athName ,
+	athDesc ,
+	genderCode ,
+	birthday ,
+	orgCode
+  ) values (
+	%(athCode)s ,
+	%(athName)s ,
+	%(athDesc)s ,
+	%(genderCode)s ,
+	%(birthday)s ,
+	%(orgCode)s
+  )

@@ -1,0 +1,8 @@
+
+insert into T_EventOfficial (eventCode , officialCode , functionCode )
+select eventCode , officialCode, functionCode  from (
+	select %(eventCode)s as eventCode , [value] as officialCode , %(functionCode)s as functionCode from openJson(%(codes)s)
+) a where
+not exists (
+	select * from T_EventOfficial eo where eo.officialCode = a.officialCode and eo.eventCode =a.eventCode
+)

@@ -1,0 +1,1 @@
+select o.* , d.dictName as orgTypeName from T_Org o join T_Dict d on d.dictCateCode='orgType' and  o.orgTypeCode = d.dictCode order by o.orgOrder

@@ -1,0 +1,45 @@
+select
+	e.F_XMLID as eventCode  ,
+	pr.F_PhaseID as phaseId ,
+	p.F_PhaseCode as poolCode ,
+	pd.F_PhaseShortName as poolName,
+	FORMAT(p.F_StartTime, 'HH:mm') as startTime,
+	tccd.F_CourtShortName as piste,
+	isnull((SELECT STUFF(
+    (SELECT '/' + RIF.RefereeInfo FROM (
+		SELECT 
+			TSRS.F_PhaseID,
+			STRRD.F_PrintShortName+'('+STCDD.F_DelegationShortName+')' AS RefereeInfo
+			FROM TS_RoundServant AS TSRS
+			LEFT JOIN TC_Function AS TCF ON TSRS.F_FunctionID=TCF.F_FunctionID
+			LEFT JOIN TR_Register AS STRR ON TSRS.F_RegisterID=STRR.F_RegisterID 
+			LEFT JOIN TR_Register_Des AS STRRD ON STRR.F_RegisterID=STRRD.F_RegisterID AND STRRD.F_LanguageCode='CHN'
+			LEFT JOIN TC_Delegation_Des AS STCDD ON STRR.F_DelegationID=STCDD.F_DelegationID AND STCDD.F_LanguageCode='CHN'
+			WHERE F_PhaseID=pr.F_PhaseID
+		)AS RIF FOR XML PATH('')), 
+    1, 1, '') AS Referee),'')AS poolReferee,
+	pr.F_PhasePosition as matchOrder ,
+	dd.F_DelegationShortName ,
+	rd.F_PrintLongName ,
+	pr.F_Result1 as r1 ,
+	pr.F_Result2 as r2 ,
+	pr.F_Result3 as r3 ,
+	pr.F_Result4 as r4 ,
+	pr.F_Result5 as r5 ,
+	pr.F_Result6 as r6 ,
+	pr.F_Result7 as r7 ,
+	ISNULL(pr.F_IndexChar,'')as indexWin ,
+	ISNULL(pr.F_Diff,0)as diff ,
+	ISNULL(pr.F_TcGive,0)as hs ,
+	ISNULL(pr.F_TcReceive,0)as hr
+from TS_Phase_Result pr
+join TS_Phase p on p.F_PhaseID = pr.F_PhaseID  and p.F_Level =1 and p.F_PhaseType=1
+join TS_Phase_Des pd on pd.F_PhaseID=pr.F_PhaseID and pd.F_LanguageCode='CHN'
+join TC_Court_Des tccd on p.F_CourtID=tccd.F_CourtID and tccd.F_LanguageCode='CHN'
+join TS_Event e on e.F_EventID = p.F_EventID
+join TR_Register r on r.F_RegisterID = pr.F_RegisterID
+join TR_Register_Des rd on rd.F_RegisterID = r.F_RegisterID and rd.F_LanguageCode='CHN'
+join TC_Delegation d on d.F_DelegationID = r.F_DelegationID
+join TC_Delegation_Des dd on dd.F_DelegationID = d.F_DelegationID and dd.F_LanguageCode='CHN'
+where e.F_XMLID = %(eventCode)s 
+order by p.F_PhaseID , pr.F_PhasePosition;

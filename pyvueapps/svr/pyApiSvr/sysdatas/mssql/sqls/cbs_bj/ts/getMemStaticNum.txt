@@ -1,0 +1,9 @@
+select
+	cateOrder , cateCode , cateLabel , itemOrder , actionCode , itemLabel ,
+	count(*) as nums
+from v_static_log
+where
+	matchCode=%(matchCode)s  and memCode=%(memCode)s
+group by
+	cateOrder , cateCode , cateLabel , itemOrder , actionCode , itemLabel
+order by cateOrder , itemOrder

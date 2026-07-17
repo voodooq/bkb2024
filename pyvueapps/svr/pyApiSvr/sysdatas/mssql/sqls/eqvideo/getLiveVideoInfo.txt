@@ -1,0 +1,19 @@
+select
+	g.gameCode , g.gameName , g.address
+	,case
+		when r.startTm>0 and r.endTm=0 then 1 else 0
+	end as isLive
+	, isnull(r.resId,0) as isLiving
+	, isnull(e.eventName,'') as eventName
+	, isnull(p.phaseName,'') as phaseName
+	, isnull(r.orgName,'') as orgName
+	, isnull(r.athName,'') as athName
+	, isnull(r.athGender,'') as athGender
+	, isnull(r.horseName,'') as horseName
+	, g.flvUrl
+	, g.m3u8Url
+from T_Game g
+left join (select top 1 * from T_Res where gameCode =%(gameCode)s and startTm>0 and endTm=0) r on r.gameCode = g.gameCode
+left join T_Event e on e.eventCode = r.eventCode
+left join T_Phase p on p.phaseCode = r.phaseCode
+where g.gameCode=%(gameCode)s

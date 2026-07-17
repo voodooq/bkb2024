@@ -1,0 +1,8 @@
+  update T_Ath set
+	athCode = %(athCode)s,
+	athName = %(athName)s,
+	athDesc = %(athDesc)s,
+	genderCode = %(genderCode)s,
+	birthday = %(birthday)s
+where
+	athId=%(athId)s

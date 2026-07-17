@@ -1,0 +1,6 @@
+update T_MemStatic set
+	memCode=%(memCode)s ,
+	actionCode=%(actionCode)s ,
+	enableFlag=%(enableFlag)s
+where
+	staticId =%(staticId)s

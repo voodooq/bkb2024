@@ -1,0 +1,6 @@
+MERGE INTO T_UserRole AS target
+USING (SELECT %(userCode)s AS userCode, %(roleCode)s AS roleCode) AS source
+ON target.userCode = source.userCode
+WHEN NOT MATCHED THEN
+  INSERT (userCode, roleCode)
+  VALUES (source.userCode, source.roleCode);

@@ -1,0 +1,4 @@
+update T_Piste set
+    pisteCode =%(pisteCode)s ,
+    pisteDesc =%(pisteDesc)s
+where pisteId = %(pisteId)s

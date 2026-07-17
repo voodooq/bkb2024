@@ -1,0 +1,2 @@
+select * from T_Game
+select * from T_DictAge

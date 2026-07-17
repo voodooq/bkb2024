@@ -1,0 +1,16 @@
+select
+	e.F_EventID as eventId , e.F_XMLID as eventCode ,
+	isnull( i.F_IniDisPos ,0) as athOrder ,
+	d.F_DelegationCode as orgCode ,
+	dd.F_DelegationShortName as orgName ,
+	r.F_RegisterCode as athCode ,
+	rd.F_PrintLongName as athName  ,
+	i.F_InscriptionRank as pointRank
+from TR_Inscription i
+join TR_Register r on r.F_RegisterID = i.F_RegisterID
+join TR_Register_Des rd on r.F_RegisterID = rd.F_RegisterID  and rd.F_LanguageCode = 'CHN'
+join TS_Event e on e.F_EventID = i.F_EventID and e.F_PlayerRegTypeID = 1
+join TC_Delegation  d  on d.F_DelegationID = r.F_DelegationID
+join TC_Delegation_Des dd on dd.F_DelegationID = r.F_DelegationID  and dd.F_LanguageCode = 'CHN'
+where e.F_XMLID = %(eventCode)s
+order by  e.F_EventCode ,  athOrder;

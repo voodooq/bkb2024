@@ -1,0 +1,35 @@
+CREATE TABLE t_sport(
+	sportId INT AUTO_INCREMENT PRIMARY KEY ,
+	sportCode VARCHAR(100) DEFAULT '' ,
+	sportName VARCHAR(100) DEFAULT '' ,
+	address VARCHAR(100)  DEFAULT '' ,
+	openDate DATE NULL ,
+	closeDate DATE NULL ,
+	sportStatus INT DEFAULT 1 
+);
+CREATE TABLE t_event (
+	eventId INT AUTO_INCREMENT PRIMARY KEY ,
+	sportCode VARCHAR(100) DEFAULT '' ,
+	eventOrder INT DEFAULT 1 ,
+	eventCode VARCHAR(100) DEFAULT '' ,
+	eventName VARCHAR(100) DEFAULT ''   
+);
+
+CREATE TABLE t_phase(
+	phaseId INT AUTO_INCREMENT PRIMARY KEY ,
+	eventCode VARCHAR(100) DEFAULT '' ,
+	phaseOrder INT DEFAULT 1,
+	phaseCode VARCHAR(100) DEFAULT '' ,
+	phaseName VARCHAR(100) DEFAULT ''   
+);
+
+CREATE TABLE t_athItem(
+	itemId INT AUTO_INCREMENT PRIMARY KEY ,
+	phaseCode VARCHAR(100) DEFAULT '' ,
+	athCode VARCHAR(100) DEFAULT '' ,
+	clubName VARCHAR(100) DEFAULT '' ,
+	athName VARCHAR(100) DEFAULT '' ,
+	athDesc VARCHAR(200) DEFAULT '' ,
+	startTime INT DEFAULT 0 ,
+	endTime INT DEFAULT 0 
+);

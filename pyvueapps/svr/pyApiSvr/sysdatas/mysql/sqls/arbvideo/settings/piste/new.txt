@@ -1,0 +1,7 @@
+INSERT INTO T_Piste(
+	pisteCode ,
+	pisteDesc
+) VALUES (
+	%(pisteCode)s ,
+	%(pisteDesc)s
+)

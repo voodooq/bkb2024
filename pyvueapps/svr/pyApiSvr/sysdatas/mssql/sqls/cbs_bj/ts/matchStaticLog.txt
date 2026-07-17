@@ -1,0 +1,6 @@
+select * from v_static_log where matchCode =%(matchCode)s 
+AND (
+    %(cateCode)s = '' 
+    OR cateCode = %(cateCode)s
+) 
+order by tm desc

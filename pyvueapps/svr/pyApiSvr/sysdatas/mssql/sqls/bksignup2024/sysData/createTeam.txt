@@ -1,0 +1,23 @@
+insert into T_Team (
+	createUserCode ,
+	eventCode ,
+	phaseCode ,
+	areaCode ,
+	teamCode ,
+	teamKey ,
+	teamName ,
+	logoImg ,
+	signupStatusCode ,
+	checkStatusCode
+) values (
+	%(createUserCode)s ,
+	%(eventCode)s ,
+	%(phaseCode)s ,
+	%(areaCode)s ,
+	%(teamKey)s ,
+	%(teamKey)s ,
+	%(teamName)s ,
+	%(logoImg)s ,
+	%(signupStatusCode)s ,
+	%(checkStatusCode)s
+)

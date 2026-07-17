@@ -1,0 +1,1 @@
+exec proc_setMatchHomeOrAwayTeamCode %(matchCode)s , %(hora)s , %(teamCode)s

@@ -1,0 +1,3 @@
+SELECT COUNT(DISTINCT T_Team.teamCode) as teamCount from T_Team
+INNER JOIN T_TeamMem ON T_TeamMem.teamCode = T_Team.teamKey
+where T_Team.signupStatusCode = %(signupStatusCode)s AND T_TeamMem.functionCode = '01'

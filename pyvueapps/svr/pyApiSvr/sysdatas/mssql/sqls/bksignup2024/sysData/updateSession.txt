@@ -1,0 +1,5 @@
+update T_Session set
+    tel =%(tel)s ,
+    validCode =%(code)s
+where
+    sessionId =%(sessionId)s

@@ -1,0 +1,6 @@
+update T_ResL set
+	startTm=0 ,
+	endTm =0 ,
+	score = '' ,
+	irm=''
+where reslId=%(reslId)s

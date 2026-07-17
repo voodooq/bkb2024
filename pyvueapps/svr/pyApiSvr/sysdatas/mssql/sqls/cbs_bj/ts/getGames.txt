@@ -1,0 +1,29 @@
+select
+	g.gameId , g.gameOrder , g.gameCode , g.gameName , g.address , g.gameStatus ,
+	g.areaCode , a.dictLabel as areaLabel ,
+	case
+		when openDate is null then ''
+		else convert(varchar(10) , openDate , 121)
+	end  as openDate ,
+	case
+		when closeDate is null then ''
+		else convert(varchar(10) , closeDate , 121)
+	end  as closeDate ,
+	case
+		when gameStatus = 0 then '未开始'
+		when gameStatus = 1 then '进行中'
+		when gameStatus = 2 then '已结束'
+		else ''
+	end as gameStatusLabel
+from T_Game g
+join T_DictArea a on a.dictCode = g.areaCode
+where g.gameName like '%'+%(gameName)s+'%'
+AND (
+%(gameStatus)s = '' 
+    OR g.gameStatus = %(gameStatus)s
+)
+AND (
+%(gameCode)s = '' 
+    OR g.gameCode = %(gameCode)s
+)
+order by g.gameOrder

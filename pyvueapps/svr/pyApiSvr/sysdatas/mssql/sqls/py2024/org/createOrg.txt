@@ -1,0 +1,14 @@
+insert into T_Org(
+	orgOrder ,
+	orgCode ,
+	orgName ,
+	orgDesc ,
+	orgTypeCode
+) values (
+	%(orgOrder)s ,
+	%(orgCode)s ,
+	%(orgName)s ,
+	%(orgDesc)s ,
+	%(orgTypeCode)s
+
+)

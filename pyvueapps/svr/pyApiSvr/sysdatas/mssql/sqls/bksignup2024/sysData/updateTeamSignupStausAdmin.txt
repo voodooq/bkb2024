@@ -1,0 +1,1 @@
+update T_Team set signupStatusCode =%(signupStatus)s where teamKey=%(teamKey)s

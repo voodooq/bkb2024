@@ -1,0 +1,7 @@
+select
+	p.* ,
+	e.eventName
+from T_Phase p
+join T_Event e on e.eventCode = p.eventCode and  p.matchNum>0
+where e.gameCode = %(gameCode)s
+order by e.eventOrder , p.phaseOrder

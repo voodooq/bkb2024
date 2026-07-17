@@ -1,0 +1,1 @@
+exec proc_setMatchHomeOrAwayRes %(matchCode)s , %(hora)s , %(res)s

@@ -1,0 +1,1 @@
+select * from v_info_matchMember where matchCode=%(matchCode)s order by bibCode

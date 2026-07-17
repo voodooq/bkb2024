@@ -1,0 +1,10 @@
+insert into T_EventAth(eventCode , athCode )
+select
+	%(eventCode)s as eventCode , a.athCode  from T_Ath a
+where
+	a.athCode in (
+		select [value] from openjson(%(athIds)s)
+	)
+	and not exists (
+		select * from T_EventAth ea where ea.eventCode =%(eventCode)s and ea.athCode = a.athCode
+	)

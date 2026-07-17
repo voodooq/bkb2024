@@ -1,0 +1,32 @@
+SELECT TSE.F_EventCode AS eventShortCode,
+	TSE.F_XMLID as eventCode ,
+	TSER.F_EventDisPos AS displayOrder,
+	TSER.F_EventRank AS [rank],
+	isnull(TCM.F_MedalCode,'') AS medalCode,
+	TRR.F_RegisterCode AS regCode,
+	TRRD.F_PrintLongName AS regName,
+	TCDD.F_DelegationLongName AS orgName,
+	isnull(TCI.F_IRMCODE ,'') AS irm,
+	isnull(TeamMember.teamMember,'') as teamMember
+FROM TS_Event_Result AS TSER
+LEFT JOIN TS_Event AS TSE ON TSE.F_EventID=TSER.F_EventID
+LEFT JOIN TC_Medal AS TCM ON TSER.F_MedalID =TCM.F_MedalID
+LEFT JOIN TR_Register AS TRR ON TSER.F_RegisterID=TRR.F_RegisterID
+LEFT JOIN TR_Register_Des AS TRRD ON TRR.F_RegisterID = TRRD.F_RegisterID AND TRRD.F_LanguageCode='CHN'
+LEFT JOIN TC_Delegation_Des AS TCDD ON TRR.F_DelegationID =TCDD.F_DelegationID AND TCDD.F_LanguageCode='CHN'
+LEFT JOIN TC_IRM AS TCI ON TCI.F_IRMID=TSER.F_IRMID
+LEFT JOIN (
+SELECT F_RegisterID,
+STUFF((SELECT ','+ F_MemberName FROM (SELECT TRRM.F_RegisterID,
+	TRRD.F_PrintLongName AS F_MemberName
+FROM TR_Register_Member AS TRRM
+LEFT JOIN TR_Register_Des AS TRRD ON TRRM.F_MemberRegisterID=TRRD.F_RegisterID AND F_LanguageCode='CHN')AS B WHERE B.F_RegisterID=A.F_RegisterID FOR xml path('')),1,1,'')AS teamMember
+FROM
+(SELECT TRRM.F_RegisterID,
+	TRRD.F_PrintLongName AS F_MemberName
+FROM TR_Register_Member AS TRRM
+LEFT JOIN TR_Register_Des AS TRRD ON TRRM.F_MemberRegisterID=TRRD.F_RegisterID AND F_LanguageCode='CHN') AS A
+GROUP BY F_RegisterID
+) AS TeamMember ON TSER.F_RegisterID=TeamMember.F_RegisterID
+where TSE.F_XMLID=%(eventCode)s
+ORDER BY TSE.F_EventCode,TSER.F_EventDisPos;

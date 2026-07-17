@@ -1,0 +1,24 @@
+select
+	e.F_EventID as eventId , e.F_XMLID as eventCode , ed.F_EventShortName as eventName ,
+	p.F_PhaseID as phaseId , p.F_Order as phaseOrder , p.F_PhaseCode as phaseCode , pd.F_PhaseShortName as phaseName
+	,p.F_Level as phaseLevel
+	,p.F_PhaseType as phaseType
+	,isnull( m.matchCount ,0) as matchCount
+	, case
+		when (p.F_Level=1 and p.F_PhaseType=3) or (p.F_Level=1 and p.F_PhaseType=5) then isnull(
+			(select top 1  np.F_PhaseID  From TS_Phase np where np.F_EventID = p.F_EventID and p.F_Order + 1 = np.F_Order and np.F_Level = p.F_Level and np.F_PhaseType = p.F_PhaseType) ,
+			0
+		)
+		else 0
+	end as nextPhaseId
+from TS_Phase p
+join TS_Phase_Des pd on p.F_PhaseID = pd.F_PhaseID and pd.F_LanguageCode = 'CHN'
+join TS_Event e on e.F_EventID = p.F_EventID
+join TS_Event_Des ed on ed.F_EventID = e.F_EventID and ed.F_LanguageCode = 'CHN'
+left join (
+	select F_PhaseID , count(*) as matchCount from TS_Match group by F_PhaseID
+) m on m.F_PhaseID = p.F_PhaseID
+where
+    p.F_Level>0 and F_PhaseType in (3,5) and
+    e.F_XMLID=%(eventCode)s;
+

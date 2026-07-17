@@ -1,0 +1,40 @@
+declare @matchCode varchar(100)
+select @matchCode =%(matchCode)s
+select
+	m.matchId , m.matchCode , m.homeCode , ISNULL( ht.teamName,'') as homeName , m.awayCode , isnull(at.teamName , '' ) as awayName ,
+	g.gameCode , g.gameName , e.eventCode , e.eventName , p.phaseCode , p.phaseName
+from T_Match m
+join T_Phase p on p.phaseCode = m.phaseCode
+join T_Event e on e.eventCode = p.eventCode
+join T_Game g on g.gameCode = e.gameCode
+left join T_Team ht on ht.teamCode = isnull( m.homeCode,'')
+left join T_Team at on at.teamCode = isnull( m.awayCode,'')
+where m.matchCode = @matchCode
+
+select * from T_Section where matchCode = @matchCode order by sectionOrder
+
+select
+	* ,
+	'[ '+tm.bibCode+' ] '+mb.memName as memDispName
+from T_MatchMember mm
+join T_Match m on m.matchCode = mm.matchCode and mm.matchCode= @matchCode
+join T_TeamMember tm on tm.memCode = mm.memCode and tm.functionCode='04' and  tm.teamCode = case
+		when mm.hora='h' then isnull(m.homeCode,'')
+		when mm.hora='a' then isnull(m.awayCode,'')
+		else ''
+	end
+join T_Member mb on mb.memCode = mm.memCode
+order by tm.bibCode
+
+select
+	sc.cateOrder , sc.cateCode , sc.cateLabel ,
+	si.itemOrder , si.itemCode , si.itemLabel , si.score
+from T_DictStaticCategory sc
+join T_DictStaticItem si on si.cateCode = sc.cateCode  and itemEnable = 1
+order by cateOrder , itemOrder
+
+
+-- status
+
+select * from v_scorestatus_match where matchCode=@matchCode
+select *, ROW_NUMBER() over ( order by sectionOrder) -1 as sectionIndex from v_scorestatus_section where matchCode=@matchCode

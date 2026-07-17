@@ -1,0 +1,1 @@
+delete from  T_Org where orgId = %(orgId)s
