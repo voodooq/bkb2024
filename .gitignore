@@ -11,3 +11,4 @@ core.*
 nohup.out
 *.zip
 dist_bak/
+docs/
