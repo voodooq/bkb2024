@@ -11,7 +11,7 @@ WORKDIR /pyvueapps/svr/pyApiSvr
 COPY ./pyvueapps /pyvueapps
 
 # 安装项目运行所需的额外依赖（利用阿里云镜像源加速）
-RUN pip install alibabacloud_dysmsapi20170525 alibabacloud_tea_openapi alibabacloud_tea_util DBUtils==1.3 pymysql pymssql fastapi uvicorn -i https://mirrors.aliyun.com/pypi/simple/
+RUN pip install oss2 aliyun-python-sdk-core aliyun-python-sdk-sts alibabacloud_dysmsapi20170525 alibabacloud_tea_openapi alibabacloud_tea_util DBUtils==1.3 pymysql pymssql fastapi uvicorn -i https://mirrors.aliyun.com/pypi/simple/
 
 # 暴露端口 (如果有需要外部访问，与 docker-compose.yml 中的 ports 映射对应)
 EXPOSE 8010
